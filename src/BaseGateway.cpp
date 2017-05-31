@@ -159,6 +159,10 @@ const long SensorInterval = 60000;
 
 #define DHT_DATA_PIN 3
 #define SENSOR_TEMP_OFFSET 0
+// Sleep time between sensor updates (in milliseconds)
+// Must be >1000ms for DHT22 and >2000ms for DHT11
+static const uint64_t UPDATE_INTERVAL = 3000;
+bool metric = true;
 
 MyMessage msgHum(CHILD_ID_HUM, V_HUM);
 MyMessage msgTemp(CHILD_ID_TEMP, V_TEMP);
@@ -171,6 +175,12 @@ float humidity;
 void setup()
 {
   dht.setup(DHT_DATA_PIN);
+  if (UPDATE_INTERVAL <= dht.getMinimumSamplingPeriod()) {
+    Serial.println("Warning: UPDATE_INTERVAL is smaller than supported by the sensor!");
+  }
+  // Sleep for the time of the minimum sampling period to give the sensor time to power up
+  // (otherwise, timeout errors might occure for the first reading)
+  sleep(dht.getMinimumSamplingPeriod());
 
 }
 
@@ -181,6 +191,8 @@ void presentation()
    // Register all sensors to gw (they will be created as child devices)
   present(CHILD_ID_HUM, S_HUM);
   present(CHILD_ID_TEMP, S_TEMP);
+
+  metric = getControllerConfig().isMetric;
 
 }
 
@@ -194,6 +206,7 @@ void loop()
 
 //    float temperature = dht.getTemperature();
 //    float humidity = dht.getHumidity();
+
     #ifdef MY_DEBUG
     Serial.print("T: ");
     Serial.println(temperature);
