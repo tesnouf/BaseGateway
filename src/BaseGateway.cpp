@@ -206,7 +206,7 @@ void loop()
 
 //    float temperature = dht.getTemperature();
 //    float humidity = dht.getHumidity();
-
+//    temperature += SENSOR_TEMP_OFFSET;
     #ifdef MY_DEBUG
     Serial.print("T: ");
     Serial.println(temperature);
