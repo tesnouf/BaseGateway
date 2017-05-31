@@ -1,4 +1,4 @@
-#include <Arduino.h>
+
 
 /**
  * The MySensors Arduino library handles the wireless radio link and protocol
@@ -57,13 +57,15 @@
  * Hardware SHA204 signing is currently not supported!
  *
  * Make sure to fill in your ssid and WiFi password below for ssid & pass.
- * 
+ *
  * Currently wired up as a prototype built!! checking MQTT transmission and adding temp guage!
  * CHECK MAC ADDRESS WORKS!
  * needs temp snesor added
  * needs checking against a node!
  */
 
+// Set up the Libraries needed
+#include <Arduino.h>
 
 // Enable debug prints to serial monitor
 #define MY_DEBUG
@@ -125,20 +127,20 @@
 // Enable inclusion mode
 #define MY_INCLUSION_MODE_FEATURE
 // Enable Inclusion mode button on gateway
-//#define MY_INCLUSION_BUTTON_FEATURE
+#define MY_INCLUSION_BUTTON_FEATURE
 // Set inclusion mode duration (in seconds)
 #define MY_INCLUSION_MODE_DURATION 60
 // Digital pin used for inclusion mode button
-//#define MY_INCLUSION_MODE_BUTTON_PIN  3
+#define MY_INCLUSION_MODE_BUTTON_PIN  3
 
 // Set blinking period
 #define MY_DEFAULT_LED_BLINK_PERIOD 300
 
 // Flash leds on rx/tx/err
 // Uncomment to override default HW configurations
-//#define MY_DEFAULT_ERR_LED_PIN 16  // Error led pin
-//#define MY_DEFAULT_RX_LED_PIN  16  // Receive led pin
-//#define MY_DEFAULT_TX_LED_PIN  16  // the PCB, on board LED
+#define MY_DEFAULT_ERR_LED_PIN 16  // Error led pin
+#define MY_DEFAULT_RX_LED_PIN  17  // Receive led pin
+#define MY_DEFAULT_TX_LED_PIN  18  // the PCB, on board LED
 */
 
 //
@@ -146,10 +148,11 @@
 unsigned long previousMillis = 0;
 const long SensorInterval = 60000;
 
-
+// These libraries must be below the Network and Radio settings
 #include <Ethernet.h>
 #include <MySensors.h>
 #include <DHT.h>
+
 
 #define CHILD_ID_HUM 0
 #define CHILD_ID_TEMP 1
@@ -161,8 +164,8 @@ MyMessage msgHum(CHILD_ID_HUM, V_HUM);
 MyMessage msgTemp(CHILD_ID_TEMP, V_TEMP);
 DHT dht;
 
-float temperature = 12;
-float humidity = 10;
+float temperature;
+float humidity;
 
 
 void setup()
@@ -174,7 +177,7 @@ void setup()
 void presentation()
 {
 	// Present locally attached sensors here Temp/Humidity Sensor
- sendSketchInfo("TempAndHumidityTest", "1.1");
+ sendSketchInfo("Gateway-Temp-Humidity", "1.1");
    // Register all sensors to gw (they will be created as child devices)
   present(CHILD_ID_HUM, S_HUM);
   present(CHILD_ID_TEMP, S_TEMP);
@@ -191,11 +194,12 @@ void loop()
 
 //    float temperature = dht.getTemperature();
 //    float humidity = dht.getHumidity();
-
+    #ifdef MY_DEBUG
     Serial.print("T: ");
     Serial.println(temperature);
     Serial.print("H: ");
     Serial.println(humidity);
+    #endif
 //    temperature ++;
 //    humidity ++; // were for testing to see if MQTT was sending updates
 // now need to add in the DHT sensor based on available input pins and enable the above comments.  Then add the snesors
