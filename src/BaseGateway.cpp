@@ -218,8 +218,8 @@ void loop()
 // now need to add in the DHT sensor based on available input pins and enable the above comments.  Then add the snesors
 // to OpenHab and we have a gateway wit htemp and humidity
     // send a message
-    send(msgTemp.set(temperature, 1));
-    send(msgHum.set(humidity, 1));
+    // send(msgTemp.set(temperature, 1));
+    // send(msgHum.set(humidity, 1));
   }
 	// Send locally attached sensors data here
 }
