@@ -81,7 +81,7 @@
 #define MY_MQTT_SUBSCRIBE_TOPIC_PREFIX "gateway-in"
 
 // Set MQTT client id
-#define MY_MQTT_CLIENT_ID "gateway"
+#define MY_MQTT_CLIENT_ID "gateway-hub"
 
 // W5100 Ethernet module SPI enable (optional if using a shield/module that manages SPI_EN signal)
 //#define MY_W5100_SPI_EN 4
@@ -118,7 +118,7 @@
 
 // MQTT broker ip address or url. Define one or the other.
 //#define MY_CONTROLLER_URL_ADDRESS "m20.cloudmqtt.com"
-#define MY_CONTROLLER_IP_ADDRESS 192, 168, 1, 73
+#define MY_CONTROLLER_IP_ADDRESS 192, 168, 1, 100
 
 // The MQTT broker port to to open
 #define MY_PORT 1883
