@@ -200,26 +200,26 @@ void presentation()
 void loop()
 {
 //  dht.readSensor(true); // Possibly need this to make the DHT work
-  unsigned long currentMillis = millis();
-  if ( currentMillis - previousMillis >= SensorInterval) {
-    previousMillis = currentMillis;
-
-//    float temperature = dht.getTemperature();
-//    float humidity = dht.getHumidity();
-//    temperature += SENSOR_TEMP_OFFSET;
-    #ifdef MY_DEBUG
-    Serial.print("T: ");
-    Serial.println(temperature);
-    Serial.print("H: ");
-    Serial.println(humidity);
-    #endif
-//    temperature ++;
-//    humidity ++; // were for testing to see if MQTT was sending updates
-// now need to add in the DHT sensor based on available input pins and enable the above comments.  Then add the snesors
-// to OpenHab and we have a gateway wit htemp and humidity
-    // send a message
-    // send(msgTemp.set(temperature, 1));
-    // send(msgHum.set(humidity, 1));
-  }
+//   unsigned long currentMillis = millis();
+//   if ( currentMillis - previousMillis >= SensorInterval) {
+//     previousMillis = currentMillis;
+//
+// //    float temperature = dht.getTemperature();
+// //    float humidity = dht.getHumidity();
+// //    temperature += SENSOR_TEMP_OFFSET;
+//     #ifdef MY_DEBUG
+//     Serial.print("T: ");
+//     Serial.println(temperature);
+//     Serial.print("H: ");
+//     Serial.println(humidity);
+//     #endif
+// //    temperature ++;
+// //    humidity ++; // were for testing to see if MQTT was sending updates
+// // now need to add in the DHT sensor based on available input pins and enable the above comments.  Then add the snesors
+// // to OpenHab and we have a gateway wit htemp and humidity
+//     // send a message
+//     // send(msgTemp.set(temperature, 1));
+//     // send(msgHum.set(humidity, 1));
+//   }
 	// Send locally attached sensors data here
 }
