@@ -109,16 +109,16 @@
 //#define MY_MQTT_PASSWORD "password"
 //
 // Enable MY_IP_ADDRESS here if you want a static ip address (no DHCP)
-#define MY_IP_ADDRESS 192,168,1,66
+#define MY_IP_ADDRESS 10,0,0,50
 #define MY_MAC_ADDRESS 0xDE, 0xDE, 0xBE, 0xBE, 0xFE, 0xFE //confirm this works tim added March 6th
 
 // If using static ip you need to define Gateway and Subnet address as well
-#define MY_IP_GATEWAY_ADDRESS 192,168,1,254
+#define MY_IP_GATEWAY_ADDRESS 10,0,0,1
 #define MY_IP_SUBNET_ADDRESS 255,255,255,0
 
 // MQTT broker ip address or url. Define one or the other.
 //#define MY_CONTROLLER_URL_ADDRESS "m20.cloudmqtt.com"
-#define MY_CONTROLLER_IP_ADDRESS 192, 168, 1, 100
+#define MY_CONTROLLER_IP_ADDRESS 10, 0, 0, 39
 
 // The MQTT broker port to to open
 #define MY_PORT 1883
